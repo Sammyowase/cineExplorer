@@ -5,7 +5,7 @@ export const getImageUrl = (
     size: 'w200' | "w300" | "w500" | "w780" | "original" = "w500"
 ): string | null => {
     if (!path) return null;
-    return `${TMDB_IMAGE_BASE}/${size}&{path}`;
+    return `${TMDB_IMAGE_BASE}/${size}${path}`;
 
 }
 

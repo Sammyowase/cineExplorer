@@ -31,7 +31,7 @@ export default async function MovieResults({
   ]);
 
   const genreMap = new Map(
-    genresData.genre.map((g) => [g.id, g.name])
+    genresData.genres.map((g) => [g.id, g.name])
   );
 
   const hasResults = moviesData.results.length > 0;

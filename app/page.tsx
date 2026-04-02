@@ -37,7 +37,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
               <SearchBar />
             </Suspense>
             <Suspense fallback={<div className="flex gap-2 overflow-x-auto pb-1"><div className="skeleton h-9 w-16 rounded-full" /></div>}>
-              <GenreFilter genres={genresData.genre} />
+              <GenreFilter genres={genresData.genres} />
             </Suspense>
           </div>
         </div>

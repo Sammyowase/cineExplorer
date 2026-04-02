@@ -69,7 +69,7 @@ export interface TMDBResponse<T> {
 }
 
 export interface GenreListResponse {
-    genre: Genre[];
+    genres: Genre[];
 }
 
 export interface MovieSearchParams {

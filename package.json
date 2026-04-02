@@ -1,5 +1,6 @@
 {
-  "name": "check",
+  "name": "cine-explorer",
+  "author": "Samuel Owase",
   "version": "0.1.0",
   "private": true,
   "scripts": {
