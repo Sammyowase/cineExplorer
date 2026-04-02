@@ -43,7 +43,7 @@ export default function RootLayout({
           <footer className="border-t border-border bg-surface py-6">
             <div className="mx-auto max-w-7xl px-4 text-center text-xs text-text-secondary sm:px-6 lg:px-8">
               <p>
-                Built with Next.js & TMDB API.{" "}
+                cineExplorer @ { new Date().getFullYear()} .{" "}
                 <a
                   href="https://www.themoviedb.org/"
                   target="_blank"

@@ -7,9 +7,10 @@ import type { Movie } from "@/types/tmdb";
 interface MovieCardProps {
   movie: Movie;
   genreMap?: Map<number, string>;
+  priority?: boolean;
 }
 
-const MovieCard =({ movie, genreMap }: MovieCardProps) =>{
+export default function MovieCard({ movie, genreMap, priority = false }: MovieCardProps) {
   const posterUrl = getImageUrl(movie.poster_path, "w500");
   const year = formatYear(movie.release_date);
   const genres = movie.genre_ids
@@ -22,8 +23,8 @@ const MovieCard =({ movie, genreMap }: MovieCardProps) =>{
       href={`/movies/${movie.id}`}
       className="group flex flex-col overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/10"
     >
-      
-      <div className="relative aspect-2/3 w-full overflow-hidden bg-surface">
+      {/* Poster */}
+      <div className="relative aspect-[2/3] w-full overflow-hidden bg-surface">
         {posterUrl ? (
           <Image
             src={posterUrl}
@@ -31,6 +32,7 @@ const MovieCard =({ movie, genreMap }: MovieCardProps) =>{
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
             className="object-cover transition-transform duration-300 group-hover:scale-105"
+            priority={priority}
           />
         ) : (
           <div className="flex h-full items-center justify-center text-text-secondary">
@@ -50,13 +52,13 @@ const MovieCard =({ movie, genreMap }: MovieCardProps) =>{
           </div>
         )}
 
-        {/* Rating overlay */}
+        
         <div className="absolute top-2 right-2">
           <RatingBadge rating={movie.vote_average} size="sm" />
         </div>
       </div>
 
-      
+     
       <div className="flex flex-1 flex-col gap-1.5 p-3.5">
         <h3 className="line-clamp-1 text-sm font-semibold text-text-primary transition-colors group-hover:text-brand">
           {movie.title}
@@ -79,4 +81,3 @@ const MovieCard =({ movie, genreMap }: MovieCardProps) =>{
     </Link>
   );
 }
-export default MovieCard

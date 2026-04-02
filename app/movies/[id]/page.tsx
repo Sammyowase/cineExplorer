@@ -10,6 +10,7 @@ import {
 } from "@/lib/utils";
 import Breadcrumb from "@/components/Breadcrumb";
 import RatingBadge from "@/components/RatingBadge";
+import MovieTrailer from "@/components/MovieTrailer";
 
 interface MovieDetailPageProps {
   params: Promise<{ id: string }>;
@@ -51,7 +52,7 @@ export default async function MovieDetailPage({
     notFound();
   }
 
-  const backdropUrl = getImageUrl(movie.backdrop_path, "original");
+  const backdropUrl = getImageUrl(movie.backdrop_path, "w1280");
   const posterUrl = getImageUrl(movie.poster_path, "w500");
   const year = formatYear(movie.release_date);
   const runtime = formatRuntime(movie.runtime);
@@ -80,7 +81,7 @@ export default async function MovieDetailPage({
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    
+        
         <div className="pt-6">
           <Breadcrumb
             items={[
@@ -91,9 +92,8 @@ export default async function MovieDetailPage({
           />
         </div>
 
-       
+        
         <div className="flex flex-col gap-8 pb-16 md:flex-row">
-         
           <div className="-mt-32 shrink-0 self-center md:-mt-40 md:self-start">
             <div className="relative h-[360px] w-[240px] overflow-hidden rounded-xl shadow-2xl shadow-black/20 sm:h-[450px] sm:w-[300px]">
               {posterUrl ? (
@@ -113,9 +113,9 @@ export default async function MovieDetailPage({
             </div>
           </div>
 
-          
-          <div className="flex flex-1 flex-col gap-4 md:-mt-16">
          
+          <div className="flex flex-1 flex-col gap-4 md:-mt-16">
+           
             <div>
               <h1 className="text-2xl font-bold text-text-primary sm:text-3xl lg:text-4xl">
                 {movie.title}
@@ -127,7 +127,7 @@ export default async function MovieDetailPage({
               )}
             </div>
 
-            
+         
             <div className="flex flex-wrap items-center gap-3 text-sm text-text-secondary">
               <RatingBadge rating={movie.vote_average} size="md" />
               <span className="h-1 w-1 rounded-full bg-border" />
@@ -144,7 +144,7 @@ export default async function MovieDetailPage({
               )}
             </div>
 
-           
+            {/* Genres */}
             <div className="flex flex-wrap gap-2">
               {movie.genres.map((genre) => (
                 <span
@@ -156,8 +156,18 @@ export default async function MovieDetailPage({
               ))}
             </div>
 
-           
-            <div className="mt-2">
+            {/* Trailer (Bonus) */}
+            {movie.videos?.results && movie.videos.results.length > 0 && (
+              <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <MovieTrailer
+                  videos={movie.videos.results}
+                  movieTitle={movie.title}
+                />
+              </div>
+            )}
+
+            {/* Overview */}
+            <div className="mt-6">
               <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-text-secondary">
                 Overview
               </h2>
@@ -166,7 +176,7 @@ export default async function MovieDetailPage({
               </p>
             </div>
 
-           
+            {/* Additional details */}
             <div className="mt-4 grid grid-cols-2 gap-4 rounded-xl bg-surface p-4 sm:grid-cols-4">
               <div>
                 <p className="text-xs font-medium text-text-secondary">
@@ -202,7 +212,7 @@ export default async function MovieDetailPage({
               </div>
             </div>
 
-        
+            {/* Cast */}
             {cast.length > 0 && (
               <div className="mt-6">
                 <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-secondary">

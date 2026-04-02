@@ -20,7 +20,6 @@ export default async function MovieResults({
   genreId,
   page,
 }: MovieResultsProps) {
- 
   const [moviesData, genresData] = await Promise.all([
     query
       ? searchMovies(query, page)
@@ -53,8 +52,13 @@ export default async function MovieResults({
       </p>
 
       <MovieGrid>
-        {moviesData.results.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} genreMap={genreMap} />
+        {moviesData.results.map((movie, index) => (
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            genreMap={genreMap}
+            priority={index < 4}
+          />
         ))}
       </MovieGrid>
 

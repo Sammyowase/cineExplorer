@@ -33,6 +33,16 @@ export interface CrewMember {
     department: string;
     profile_path: string | null;
 }
+export interface TMDBVideo {
+  id: string;
+  key: string;
+  name: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+}
 
 export interface MovieDetail {
     id: number;
@@ -59,6 +69,9 @@ export interface MovieDetail {
         cast: CastMember[];
         crew: CrewMember[];
     };
+     videos?: {
+    results: TMDBVideo[];
+  };
 }
 
 export interface TMDBResponse<T> {
