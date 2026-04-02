@@ -18,7 +18,7 @@ export const formatYear =(dateString: string): string=>{
     return dateString.split("-")[0];
 }
 
-export const formartRuntime =(minutes: number | null): string=>{
+export const formatRuntime =(minutes: number | null): string=>{
     if(!minutes) return "N/A";
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60
@@ -30,7 +30,7 @@ export const formatNumber =(num: number): string =>{
     return num.toLocaleString("en-US");
 }
 
-export const formartCurrency =(amount: number): string=>{
+export const formatCurrency =(amount: number): string=>{
     if(amount === 0) return "N/A";
     return new Intl.NumberFormat("en-US", {
         style: "currency",

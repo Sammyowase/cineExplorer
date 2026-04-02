@@ -36,7 +36,7 @@ export interface CrewMember {
 
 export interface MovieDetail {
     id: number;
-    title: number;
+    title: string;
     overview: string;
     poster_path: string | null;
     backdrop_path: string | null;
