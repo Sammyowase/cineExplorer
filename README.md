@@ -1,6 +1,14 @@
 # TMDB Content Explorer — Technical Assessment
 
-A production-quality "Content Explorer" built with **Next.js 16**, **TypeScript**, and **Tailwind CSS**, fetching data from The Movie Database (TMDB) API.
+A production-quality "Content Explorer" built with **Next.js 15**, **TypeScript**, and **Tailwind CSS**, fetching data from The Movie Database (TMDB) API.
+
+## 🌐 Live Deployment
+
+**https://cinexplorer.cineexplorer.workers.dev**
+
+*Deployed on Cloudflare Workers using OpenNext Cloudflare adapter*
+
+---
 
 ## 🚀 Quick Start
 
@@ -27,7 +35,7 @@ A production-quality "Content Explorer" built with **Next.js 16**, **TypeScript*
 
 ## 🏗️ Architecture Decisions
 
-### 1. Next.js 16 App Router & Server Components
+### 1. Next.js 15 App Router & Server Components
 I used the **App Router** to leverage **React Server Components (RSC)**. All data fetching for the listing and detail pages happens on the server. This reduces client-side JavaScript, improves SEO (via `generateMetadata`), and allows for faster First Contentful Paint (FCP).
 
 ### 2. API Layer Abstraction (`lib/tmdb.ts`)
@@ -77,19 +85,21 @@ The main listing page uses **Streaming with Suspense**. The Hero section and sea
 
 ## 🛠️ Trade-offs & Future Improvements
 
--   **Infinite Scroll vs Pagination**: I chose **Pagination** because it’s better for SEO and URL shareability. Infinite scroll can often lead to "footer chasing" and makes it harder to bookmark a specific result page.
+-   **Infinite Scroll vs Pagination**: I chose **Pagination** because it's better for SEO and URL shareability. Infinite scroll can often lead to "footer chasing" and makes it harder to bookmark a specific result page.
 -   **UI Library**: I avoided UI libraries (Radix/Shadcn) per the brief to showcase raw CSS/Tailwind skills. In a larger production app, I would use Radix primitives for more complex components like accessible dropdowns or modals.
 -   **Testing Scope**: With more time, I would add **Playwright** for E2E testing to verify the full user flow (Search → Filter → Navigate → Back).
--   **Edge Caching**: While aware of **OpenNext** and Cloudflare's `Cache-Control` capabilities, I focused on application-level caching via Next.js `fetch` options for portability across Vercel and Cloudflare.
+-   **Edge Caching**: Used OpenNext's built-in cache mapping. A future improvement would be adding custom `x-cache-status` headers via middleware for debugging cache HIT/MISS behavior.
 
 ---
 
 ## 🧪 Bonus Tasks Attempted
 
--   **B-1: Cloudflare Workers Edge Caching with OpenNext**: 
-    - **Implementation**: Used `@opennextjs/cloudflare` to map Next.js fetch cache semantics to the Workers runtime.
-    - **Cache Header**: Implemented `middleware.ts` to expose an `x-cache-status: HIT/MISS` header on the listing page.
-    - **Awareness**: Documented how OpenNext leverages the Workers Cache API to provide ISR/SSG functionality at the edge.
--   **B-2: React 18 Streaming with Suspense**: Implemented on the home page listing.
--   **B-3: Accessibility Audit**: Achieved high compliance through semantic HTML, ARIA, and contrast fixes.
+-   **B-1: Cloudflare Workers Edge Caching with OpenNext** :
+    -   **Implementation**: Used `@opennextjs/cloudflare` to map Next.js fetch cache semantics to the Workers runtime.
+    -   **Cache Strategies**: Applied `revalidate`, `force-cache`, and `no-store` options to `fetch()` calls in `lib/tmdb.ts`. OpenNext handles the mapping to Cloudflare's edge cache.
+    -   **Note**: Full `x-cache-status` header implementation via middleware was scoped out due to time constraints.
+-   **B-2: React 18 Streaming with Suspense**: ✅ Implemented on the home page listing.
+-   **B-3: Accessibility Audit**: Achieved high compliance through semantic HTML, ARIA labels, focus states, and contrast fixes.
 -   **Movie Trailers**: Implemented a "Watch Trailer" modal with YouTube integration, prioritizing official trailers and teasers.
+
+
