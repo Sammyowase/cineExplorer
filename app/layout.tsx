@@ -39,11 +39,11 @@ export default function RootLayout({
       >
         <QueryProvider>
           <Header />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 pt-16">{children}</main>
           <footer className="border-t border-border bg-surface py-6">
             <div className="mx-auto max-w-7xl px-4 text-center text-xs text-text-secondary sm:px-6 lg:px-8">
               <p>
-                cineExplorer @ Copyright {new Date().getFullYear()} .{" "}
+                Built with Next.js & TMDB API.{" "}
                 <a
                   href="https://www.themoviedb.org/"
                   target="_blank"
