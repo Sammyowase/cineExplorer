@@ -86,6 +86,10 @@ The main listing page uses **Streaming with Suspense**. The Hero section and sea
 
 ## 🧪 Bonus Tasks Attempted
 
+-   **B-1: Cloudflare Workers Edge Caching with OpenNext**: 
+    - **Implementation**: Used `@opennextjs/cloudflare` to map Next.js fetch cache semantics to the Workers runtime.
+    - **Cache Header**: Implemented `middleware.ts` to expose an `x-cache-status: HIT/MISS` header on the listing page.
+    - **Awareness**: Documented how OpenNext leverages the Workers Cache API to provide ISR/SSG functionality at the edge.
 -   **B-2: React 18 Streaming with Suspense**: Implemented on the home page listing.
 -   **B-3: Accessibility Audit**: Achieved high compliance through semantic HTML, ARIA, and contrast fixes.
 -   **Movie Trailers**: Implemented a "Watch Trailer" modal with YouTube integration, prioritizing official trailers and teasers.

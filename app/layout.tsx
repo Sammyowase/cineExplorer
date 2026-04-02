@@ -1,15 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import QueryProvider from "@/providers/QueryProvider";
 import Header from "@/components/Header";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
 
 export const metadata: Metadata = {
   title: {
@@ -32,10 +25,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" className="h-full antialiased">
       <body
         className="flex min-h-full flex-col bg-background text-text-primary"
-        style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+        style={{ fontFamily: "Inter, system-ui, sans-serif" }}
       >
         <QueryProvider>
           <Header />

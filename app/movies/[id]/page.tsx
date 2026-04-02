@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getMovieDetails } from "@/lib/tmdb";
+import { getMovieDetails, getPopularMovies } from "@/lib/tmdb";
 import {
   getImageUrl,
   formatYear,
@@ -14,6 +14,13 @@ import MovieTrailer from "@/components/MovieTrailer";
 
 interface MovieDetailPageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateStaticParams() {
+  const { results } = await getPopularMovies();
+  return results.map((movie) => ({
+    id: movie.id.toString(),
+  }));
 }
 
 export async function generateMetadata({
